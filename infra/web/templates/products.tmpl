@@ -1,0 +1,7 @@
+{{ define "page-content" }}
+<ul>
+{{- range $product := .Products }}
+  <li>{{ $product.Title }} ({{ formatPrice $product.PriceCents }})</li>
+{{- end }}
+</ul>
+{{ end }}
