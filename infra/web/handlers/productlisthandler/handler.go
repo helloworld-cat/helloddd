@@ -7,12 +7,12 @@ import (
 	"net/http"
 )
 
-func New(srv service, r renderer) *handler {
-	return &handler{srv: srv, renderer: r}
+func New(src service, r renderer) *handler {
+	return &handler{src: src, renderer: r}
 }
 
 func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	products, err := h.srv.List()
+	products, err := h.src.List()
 	if err != nil {
 		h.error(w, err)
 		return
@@ -36,7 +36,7 @@ func (h *handler) error(w http.ResponseWriter, err error) {
 
 type (
 	handler struct {
-		srv      service
+		src      service
 		renderer renderer
 	}
 
